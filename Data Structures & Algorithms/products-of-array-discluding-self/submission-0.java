@@ -1,0 +1,25 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] before = new int[nums.length];
+        before[0] = 1;
+
+        int[] after = new int[nums.length];
+        after[after.length - 1] = 1;
+
+        int[] product = new int[nums.length];
+
+        for (int i = 1; i < nums.length; i++) {
+            before[i] = before[i-1] * nums[i-1];
+        }
+
+        for (int j = nums.length - 2; j >= 0; j--) {
+            after[j] = after[j+1] * nums[j+1];
+        }
+
+        for (int k = 0; k < nums.length; k++) {
+            product[k] = before[k] * after[k];
+        }
+
+        return product;
+    }
+}
